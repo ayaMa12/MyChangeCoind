@@ -1,0 +1,116 @@
+#root {
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+ }
+
+.Sellect1,
+.Sellect2 {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  width: 200px;
+  border-radius: 10px;
+  position: relative; /* مهم لظهور dropdown items فوق العناصر */
+}
+
+.dropdown {
+  display: grid;
+  grid-template-columns: 2fr 0.2fr 2fr;
+  gap: 30px;
+  text-align: center;
+}
+
+.dropDownTo,
+.dropDownFrom {
+  background-color: #167;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+span {
+  background-color: aqua;
+  display: flex;
+  justify-content: space-between; /* نخلي الأيقونة على الشمال */
+  align-items: center;
+  padding-right: 60px;
+  gap: 10px;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+span:hover {
+  background-color: blue;
+  color: rgb(87, 87, 42);
+  transform: scale(1.05);
+}
+
+.rotate {
+  animation: spin 0.5s ease-in-out;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+img {
+  border-radius: 50%; /* نخلي الأيقونات دائرية لو أعلام */
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+}
+@media (max-width: 500px) {
+  .dropdown {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    gap: 0px;
+  }
+  .dropDownTo,
+  .dropDownFrom {
+    background-color: #167;
+    width: 100%;
+    margin-right: 40px;
+    text-align: center;
+  }
+}
+/* عرض الـ scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+/* الخلفية */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* الجزء المتحرك */
+::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 10px;
+}
+
+/* hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkred;
+}
