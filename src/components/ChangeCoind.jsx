@@ -31,7 +31,7 @@ export default function ChangeCoind({ t, i18n }) {
   //   Ero: "currency_ero",
   //   Doll: "currency_doll",
   // };
-  const API_KEY = "5539e4e2c7-df6e681a52-t7zngz";
+  // const API_KEY = "5539e4e2c7-df6e681a52-t7zngz";
   function convert(from, to) {
     dispatch({
       type: "CONVERT",
@@ -241,18 +241,20 @@ export default function ChangeCoind({ t, i18n }) {
   //APIالاولي لجب بيانات من ال  useEffect  ال
   useEffect(() => {
     axios
-      .get(`https://api.fastforex.io/fetch-all?api_key=${API_KEY}&from=EGP`)
+      // .get(`https://api.fastforex.io/fetch-all?api_key=${API_KEY}&from=EGP`)
+      .get(`https://open.er-api.com/v6/latest/EGP`)
+
       .then(function (response) {
-        console.log(response.data.results);
-        setRates(response.data.results);
-        const generatedCurrencies = Object.keys(response.data.results).map(
+        console.log(response.data.rates);
+        setRates(response.data.rates);
+        const generatedCurrencies = Object.keys(response.data.rates).map(
           (key) => ({
             type: key,
             name: key,
             flag: currencyToCountry[key]
               ? `https://flagcdn.com/w40/${currencyToCountry[key]}.png`
               : null,
-          })
+          }),
         );
         setApiCurrencies(generatedCurrencies);
       })
@@ -282,11 +284,16 @@ export default function ChangeCoind({ t, i18n }) {
   return (
     <Card
       sx={{
+        maxWidth: 520,
+        mx: "auto",
+        mt: 4,
         display: "flex",
         flexDirection: "column",
-        gap: 2,
-        p: 2,
-        boxShadow: "1px 1px 5px rgba(39, 2, 87, 1)",
+        gap: 2.5,
+        p: 3,
+        borderRadius: "16px",
+        boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
+        background: "linear-gradient(135deg, #e0f7fa, #ffffff)",
       }}
     >
       {/* INPUT */}
@@ -296,6 +303,13 @@ export default function ChangeCoind({ t, i18n }) {
         onChange={(e) => setInput(e.target.value)}
         variant="outlined"
         placeholder="0"
+        sx={{
+          "& input": {
+            fontSize: "18px",
+            textAlign: "center",
+            fontWeight: "bold",
+          },
+        }}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
             convert(fromCurrency, toCurrency);
@@ -311,7 +325,7 @@ export default function ChangeCoind({ t, i18n }) {
               textAlign: "center",
               fontSize: "15px",
             }}
-            className="dropDownTo"
+            className="currencyBox"
             onClick={() => {
               setDropdownTo(!dropdownTo);
               setDropdownFrom(false);
@@ -420,8 +434,7 @@ export default function ChangeCoind({ t, i18n }) {
               direction: (i18n?.language || "en") === "en" ? "ltr" : "rtl",
               fontSize: "15px",
             }}
-            className="dropDownFrom"
-            onClick={() => {
+className="currencyBox"            onClick={() => {
               setDropdownFrom(!dropdownFrom);
               setDropdownTo(false);
             }}
@@ -487,7 +500,16 @@ export default function ChangeCoind({ t, i18n }) {
       </div>
 
       {/* RESULT */}
-      <div>
+      <div
+        style={{
+          textAlign: "center",
+          fontSize: "18px",
+          fontWeight: "bold",
+          padding: "12px",
+          borderRadius: "12px",
+          backgroundColor: "#e0f2f1",
+        }}
+      >
         {result ? `${t("result")} : ${result}` : t("Result appeare here")}
       </div>
     </Card>

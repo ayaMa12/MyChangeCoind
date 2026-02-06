@@ -114,3 +114,20 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: darkred;
 }
+.currencyBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background-color: #00bcd4;
+  color: #000;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.currencyBox:hover {
+  background-color: #0097a7;
+  color: #fff;
+}
